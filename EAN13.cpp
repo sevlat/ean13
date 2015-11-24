@@ -13,7 +13,21 @@ using std::endl;
 bool TestEan13(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitEan13(s));
-  if (!b) cout << "Error in " << s << endl;
+  if (!b) cout << "Error in Ean13" << s << endl;
+  return b;
+}
+
+bool TestEan8(const string &s, bool bCorrect)
+{
+  bool b=(bCorrect==VerifyCheckDigitEan8(s));
+  if (!b) cout << "Error in Ean8" << s << endl;
+  return b;
+}
+
+bool TestUpc12(const string &s, bool bCorrect)
+{
+  bool b=(bCorrect==VerifyCheckDigitUpc12(s));
+  if (!b) cout << "Error in Upc12" << s << endl;
   return b;
 }
 
@@ -23,6 +37,10 @@ bool TestSpecialCases()
   if (!TestEan13("4607071770328", true)) return false;
   if (!TestEan13("4620001053575", true)) return false;
   if (!TestEan13("4601892006963", true)) return false;
+
+  if (!TestEan13("4600051000057", true)) return false; // сигареты «Прима»
+  if (!TestEan8 ("46009333",      true)) return false; // папиросы «Беломорканал»
+  if (!TestUpc12("041689300494",  true)) return false; // бензин для зажигалки «Zippo»
 
 // проверяем некорректные значения
   if (!TestEan13("12345679",      false)) return false;

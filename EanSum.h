@@ -58,8 +58,18 @@ bool VerifyCheckDigit(const string &s, int nBase);
 
 
 //////////////////////////////////////////////////////////////////////////////
-// “о же, дл€ EAN13
+// “о же, дл€ EAN-13
 bool AppendCheckDigitEan13(string &s);       // строка должна быть длиной 12
 bool VerifyCheckDigitEan13(const string &s); // строка должна быть длиной 13
+
+//////////////////////////////////////////////////////////////////////////////
+// “о же, дл€ EAN-8
+bool AppendCheckDigitEan8(string &s);       // строка должна быть длиной 7
+bool VerifyCheckDigitEan8(const string &s); // строка должна быть длиной 8
+
+//////////////////////////////////////////////////////////////////////////////
+// “о же, дл€ UPC-12
+bool AppendCheckDigitUpc12(string &s);       // строка должна быть длиной 11
+bool VerifyCheckDigitUpc12(const string &s); // строка должна быть длиной 12
 
 #endif

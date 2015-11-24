@@ -30,9 +30,15 @@ bool CEanSum::AddChar(wchar_t wch)
   return AddDigit(wch-'0');
 }
 
+int CalcCurrentSum(int nHeavy, int nLight)
+{
+  return (nHeavy*3+nLight)%10;
+}
+
 int CEanSum::GetCurrentSum() const
 {
-  return (m_nSumOdd*3+m_nSumEven)%10;
+  if (m_bOdd) return CalcCurrentSum(m_nSumOdd,  m_nSumEven);
+              return CalcCurrentSum(m_nSumEven, m_nSumOdd);
 }
 
 int CEanSum::GetCheckDigit() const
@@ -95,4 +101,26 @@ bool AppendCheckDigitEan13(string &s)
 bool VerifyCheckDigitEan13(const string &s)
 {
   return VerifyCheckDigit(s, 13);
+}
+
+////////////////////////////////////////////////////
+bool AppendCheckDigitEan8(string &s)
+{
+  return AppendCheckDigit(s, 8);
+}
+
+bool VerifyCheckDigitEan8(const string &s)
+{
+  return VerifyCheckDigit(s, 8);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+bool AppendCheckDigitUpc12(string &s)
+{
+  return AppendCheckDigit(s, 12);
+}
+
+bool VerifyCheckDigitUpc12(const string &s)
+{
+  return VerifyCheckDigit(s, 12);
 }
