@@ -35,15 +35,23 @@ int CalcCurrentSum(int nSumROdd, int nSumREven) // четность считаем СПРАВА, начи
   return (nSumROdd*3+nSumREven)%10;
 }
 
+int CalcCurrentSum(int nSumLOdd, int nSumLEven, bool bOdd) // четность считаем СЛЕВА, начиная с 0
+{
+  if (bOdd) return CalcCurrentSum(nSumLOdd,  nSumLEven);
+            return CalcCurrentSum(nSumLEven, nSumLOdd);
+}
+
 int CAccum::GetCurrentSum() const
 {
-  if (m_bOdd) return CalcCurrentSum(m_nSumLOdd,  m_nSumLEven);
-              return CalcCurrentSum(m_nSumLEven, m_nSumLOdd);
+  return CalcCurrentSum(m_nSumLOdd, m_nSumLEven, m_bOdd);
 }
 
 int CAccum::GetCheckDigit() const
 {
-  return (10-GetCurrentSum())%10;
+  // расчитываем сумму в предположении, что будет добавлен еще один символ, поэтому !m_bOdd
+  const int nCheckDigit=CalcCurrentSum(m_nSumLOdd, m_nSumLEven, !m_bOdd);
+
+  return (10-nCheckDigit)%10;
 }
 
 char CAccum::GetCheckDigitChar() const
