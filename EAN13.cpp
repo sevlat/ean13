@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 
-#include "EanSum.h"
+#include "Accum.h"
 
 using std::cin;
 using std::cout;

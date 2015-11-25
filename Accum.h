@@ -1,5 +1,5 @@
-#ifndef EanSum_h_already_included
-#define EanSum_h_already_included
+#ifndef Accum_h_already_included
+#define Accum_h_already_included
 
 using std::string;
 
@@ -7,9 +7,9 @@ using std::string;
 // Может использоваться для EAN8, UPC12, EAN13 ... для любого количества цифр,
 // .. до бесконечности, так как хранятся только последние цифры сумм
 // и четность количества введенных символов, так что переполнение не наступит никогда
-class CEanSum {
+class CAccum {
  public:
-  CEanSum();
+  CAccum();
 
  public: // Последовательный ввод цифр
   bool AddDigit(int nDigit);           // в виде чисел
@@ -19,7 +19,7 @@ class CEanSum {
 
  public:
  // Рассчитывает текущее значение контрольной суммы.
- // Если классу CEanSum скормили строку, содержащую контрольную цифру, то должна быть 0
+ // Если классу CAccum скормили строку, содержащую контрольную цифру, то должна быть 0
   int GetCurrentSum() const;
 
  // Рассчитывает текущую контрольную цифру

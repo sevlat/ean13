@@ -1,15 +1,15 @@
 #include "stdafx.h"
 
-#include "EanSum.h"
+#include "Accum.h"
 
-CEanSum::CEanSum()
+CAccum::CAccum()
  : m_bOdd(false),
    m_nSumEven(0),
    m_nSumOdd(0)
 {
 }
 
-bool CEanSum::AddDigit(int nDigit)
+bool CAccum::AddDigit(int nDigit)
 {
   if (nDigit<0 || nDigit>9) return false;
 
@@ -20,12 +20,12 @@ bool CEanSum::AddDigit(int nDigit)
   return true;
 }
 
-bool CEanSum::AddChar(char ch)
+bool CAccum::AddChar(char ch)
 {
   return AddDigit(ch-'0');
 }
 
-bool CEanSum::AddChar(wchar_t wch)
+bool CAccum::AddChar(wchar_t wch)
 {
   return AddDigit(wch-'0');
 }
@@ -35,23 +35,23 @@ int CalcCurrentSum(int nHeavy, int nLight)
   return (nHeavy*3+nLight)%10;
 }
 
-int CEanSum::GetCurrentSum() const
+int CAccum::GetCurrentSum() const
 {
   if (m_bOdd) return CalcCurrentSum(m_nSumOdd,  m_nSumEven);
               return CalcCurrentSum(m_nSumEven, m_nSumOdd);
 }
 
-int CEanSum::GetCheckDigit() const
+int CAccum::GetCheckDigit() const
 {
   return (10-GetCurrentSum())%10;
 }
 
-char CEanSum::GetCheckDigitChar() const
+char CAccum::GetCheckDigitChar() const
 {
   return GetCheckDigit()+'0';
 }
 
-wchar_t CEanSum::GetCheckDigitWChar() const
+wchar_t CAccum::GetCheckDigitWChar() const
 {
   return GetCheckDigit()+'0';
 }
@@ -59,7 +59,7 @@ wchar_t CEanSum::GetCheckDigitWChar() const
 
 bool AppendCheckDigit(string &s)
 {
-  CEanSum CheckSum;
+  CAccum CheckSum;
   for (char ch: s)
     if (!CheckSum.AddChar(ch)) return false;
 
@@ -70,7 +70,7 @@ bool AppendCheckDigit(string &s)
 
 bool VerifyCheckDigit(const string &s)
 {
-  CEanSum CheckSum;
+  CAccum CheckSum;
   for (char ch: s) {
     if (!CheckSum.AddChar(ch)) return false;
   }
