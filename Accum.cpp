@@ -4,8 +4,8 @@
 
 CAccum::CAccum()
  : m_bOdd(false),
-   m_nSumEven(0),
-   m_nSumOdd(0)
+   m_nSumLEven(0),
+   m_nSumLOdd(0)
 {
 }
 
@@ -13,8 +13,8 @@ bool CAccum::AddDigit(int nDigit)
 {
   if (nDigit<0 || nDigit>9) return false;
 
-  if (m_bOdd) m_nSumOdd =(m_nSumOdd +nDigit)%10;
-         else m_nSumEven=(m_nSumEven+nDigit)%10;
+  if (m_bOdd) m_nSumLOdd =(m_nSumLOdd +nDigit)%10;
+         else m_nSumLEven=(m_nSumLEven+nDigit)%10;
 
   m_bOdd=!m_bOdd;
   return true;
@@ -30,15 +30,15 @@ bool CAccum::AddChar(wchar_t wch)
   return AddDigit(wch-'0');
 }
 
-int CalcCurrentSum(int nHeavy, int nLight)
+int CalcCurrentSum(int nSumROdd, int nSumREven) // четность считаем СПРАВА, начиная с 0
 {
-  return (nHeavy*3+nLight)%10;
+  return (nSumROdd*3+nSumREven)%10;
 }
 
 int CAccum::GetCurrentSum() const
 {
-  if (m_bOdd) return CalcCurrentSum(m_nSumOdd,  m_nSumEven);
-              return CalcCurrentSum(m_nSumEven, m_nSumOdd);
+  if (m_bOdd) return CalcCurrentSum(m_nSumLOdd,  m_nSumLEven);
+              return CalcCurrentSum(m_nSumLEven, m_nSumLOdd);
 }
 
 int CAccum::GetCheckDigit() const
