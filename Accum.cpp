@@ -48,7 +48,7 @@ int CAccum::GetCurrentSum() const
 
 int CAccum::GetCheckDigit() const
 {
-  // расчитываем сумму в предположении, что будет добавлен еще один символ, поэтому !m_bOdd
+  // рассчитываем сумму в предположении, что будет добавлен еще один символ, поэтому !m_bOdd
   const int nCheckDigit=CalcCurrentSum(m_nSumLOdd, m_nSumLEven, !m_bOdd);
 
   return (10-nCheckDigit)%10;
