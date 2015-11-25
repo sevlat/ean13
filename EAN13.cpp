@@ -13,21 +13,21 @@ using std::endl;
 bool TestEan13(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitEan13(s));
-  if (!b) cout << "Error in Ean13" << s << endl;
+  if (!b) cout << "Error in Ean13 " << s << endl;
   return b;
 }
 
 bool TestEan8(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitEan8(s));
-  if (!b) cout << "Error in Ean8" << s << endl;
+  if (!b) cout << "Error in Ean8 " << s << endl;
   return b;
 }
 
 bool TestUpc12(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitUpc12(s));
-  if (!b) cout << "Error in Upc12" << s << endl;
+  if (!b) cout << "Error in Upc12 " << s << endl;
   return b;
 }
 
@@ -86,7 +86,7 @@ void ProcessEan13(string s)
     }
   } else if (s.length()==13) {
     if (VerifyCheckDigitEan13(s)) {
-      cout << "CheckDigit OK" << s << endl;
+      cout << "OK! CheckDigit verified" << endl;
     } else {
       cout << "Error!!!" << endl;
     }
@@ -95,7 +95,7 @@ void ProcessEan13(string s)
 
 bool TestAll()
 {
-//  if (!TestSpecialCases())   return false;
+  if (!TestSpecialCases())   return false;
   if (!TestRandomCases(100)) return false;
 
   return true;
