@@ -9,10 +9,20 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+// s may be of any length and should contain check digit
+bool TestThorough(const string &s)
+{
+  if (s.empty()) return false;
+  string s1=s.substr(0, s.length()-1); // Trim check digit
+
+  AppendCheckDigit(s1);
+  return (s==s1) && VerifyCheckDigit(s1);
+}
 
 bool TestEan13(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitEan13(s));
+  if (bCorrect) b=b && TestThorough(s);
   if (!b) cout << "Error in Ean13 " << s << endl;
   return b;
 }
@@ -20,6 +30,7 @@ bool TestEan13(const string &s, bool bCorrect)
 bool TestEan8(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitEan8(s));
+  if (bCorrect) b=b && TestThorough(s);
   if (!b) cout << "Error in Ean8 " << s << endl;
   return b;
 }
@@ -27,6 +38,7 @@ bool TestEan8(const string &s, bool bCorrect)
 bool TestUpc12(const string &s, bool bCorrect)
 {
   bool b=(bCorrect==VerifyCheckDigitUpc12(s));
+  if (bCorrect) b=b && TestThorough(s);
   if (!b) cout << "Error in Upc12 " << s << endl;
   return b;
 }
@@ -49,7 +61,7 @@ bool TestSpecialCases()
   return true;
 }
 
-bool TestRandomCase()
+bool TestRandomCaseEan13()
 {
   string s;
 
@@ -58,7 +70,28 @@ bool TestRandomCase()
     s+=ch;
   }
 
-  return AppendCheckDigitEan13(s) && TestEan13(s, true);
+  if (!AppendCheckDigitEan13(s)) return false;
+  if (!TestEan13(s, true))       return false;
+
+  return true;
+}
+
+// Random string length
+bool TestRandomCase()
+{
+  string s;
+
+  const int nLength=1+rand()%500;
+
+  for (int i=0; i<nLength; ++i) {
+    const char ch='0'+rand()%10;
+    s+=ch;
+  }
+
+  if (!AppendCheckDigit(s)) return false;
+  if (!TestThorough(s))     return false;
+
+  return true;
 }
 
 bool TestRandomCases(int nCount)
@@ -66,7 +99,15 @@ bool TestRandomCases(int nCount)
   srand((unsigned int)time(0));
 
   for (int i=0; i<nCount; ++i) {
-    if (!TestRandomCase()) return false;
+    if (!TestRandomCaseEan13()) {
+      cout << "Random test Ean13 failed!!! Count: " << i << endl;
+      return false;
+    }
+
+    if (!TestRandomCase()) {
+      cout << "Random test failed!!! Count: " << i << endl;
+      return false;
+    }
   }
 
   return true;
@@ -101,6 +142,7 @@ bool TestAll()
   return true;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
 // Если без аргументов - выполняется тест
 // Для аргументов вычисляется или проверяется контрольная цифра
 // Если 12 цифр - то вычисляется
