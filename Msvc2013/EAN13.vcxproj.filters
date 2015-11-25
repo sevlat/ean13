@@ -21,7 +21,10 @@
     <ClInclude Include="..\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\EanSum.h">
+    <ClInclude Include="..\Accum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CheckDigit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +35,10 @@
     <ClCompile Include="..\EAN13.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\EanSum.cpp">
+    <ClCompile Include="..\Accum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CheckDigit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

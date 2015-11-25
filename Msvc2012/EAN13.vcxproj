@@ -77,10 +77,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Accum.h" />
+    <ClInclude Include="..\CheckDigit.h" />
     <ClInclude Include="..\stdafx.h" />
     <ClInclude Include="..\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\CheckDigit.cpp" />
     <ClCompile Include="..\EAN13.cpp" />
     <ClCompile Include="..\Accum.cpp" />
     <ClCompile Include="..\stdafx.cpp">

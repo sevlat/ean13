@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 
-#include "Accum.h"
+#include "CheckDigit.h"
 
 using std::cin;
 using std::cout;
