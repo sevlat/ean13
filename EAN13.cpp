@@ -19,28 +19,28 @@ bool TestThorough(const string &s)
   return (s==s1) && VerifyCheckDigit(s1);
 }
 
-bool TestEan13(const string &s, bool bCorrect)
+bool TestEan13(const string &s, bool bExpected)
 {
-  bool b=(bCorrect==VerifyCheckDigitEan13(s));
-  if (bCorrect) b=b && TestThorough(s);
-  if (!b) cout << "Error in Ean13 " << s << endl;
-  return b;
+  const bool bVerified=VerifyCheckDigitEan13(s) && TestThorough(s);
+  const bool bResult=(bExpected==bVerified);
+  if (!bResult) cout << "Error in Ean13 " << s << endl;
+  return bResult;
 }
 
-bool TestEan8(const string &s, bool bCorrect)
+bool TestEan8(const string &s, bool bExpected)
 {
-  bool b=(bCorrect==VerifyCheckDigitEan8(s));
-  if (bCorrect) b=b && TestThorough(s);
-  if (!b) cout << "Error in Ean8 " << s << endl;
-  return b;
+  const bool bVerified=VerifyCheckDigitEan8(s) && TestThorough(s);
+  const bool bResult=(bExpected==bVerified);
+  if (!bResult) cout << "Error in Ean8 " << s << endl;
+  return bResult;
 }
 
-bool TestUpc12(const string &s, bool bCorrect)
+bool TestUpc12(const string &s, bool bExpected)
 {
-  bool b=(bCorrect==VerifyCheckDigitUpc12(s));
-  if (bCorrect) b=b && TestThorough(s);
-  if (!b) cout << "Error in Upc12 " << s << endl;
-  return b;
+  const bool bVerified=VerifyCheckDigitUpc12(s) && TestThorough(s);
+  const bool bResult=(bExpected==bVerified);
+  if (!bResult) cout << "Error in Upc12 " << s << endl;
+  return bResult;
 }
 
 bool TestSpecialCases()
